@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Panduan lengkap refund dana via QR Code untuk BCA, Mandiri, BRI, dan Bank Jateng. 8 langkah mudah proses pengembalian dana.">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="author" content="RefundQR">
+<meta name="keywords" content="refund qr code, refund bca, refund mandiri, refund bri, refund bank jateng, cara refund dana, panduan refund">
+<meta property="og:title" content="Refund Dana via QR Code — Panduan Resmi">
+<meta property="og:description" content="Panduan lengkap refund dana via QR Code untuk BCA, Mandiri, BRI, dan Bank Jateng. 8 langkah mudah proses pengembalian dana.">
+<meta property="og:type" content="website">
+<title>Refund Dana via QR Code — Panduan Resmi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<style>
+*{font-family:'Inter',sans-serif;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{background:#0a0a0a url('background.jpg') no-repeat center center fixed;background-size:cover;margin:0;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(180deg,rgba(10,10,10,0.92) 0%,rgba(15,15,26,0.95) 50%,rgba(10,10,10,0.98) 100%);z-index:-1}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+@keyframes textGlow{0%,100%{text-shadow:0 0 10px rgba(99,102,241,0.5)}50%{text-shadow:0 0 30px rgba(99,102,241,0.9),0 0 60px rgba(139,92,246,0.4)}}
+@keyframes pulseBtn{0%{box-shadow:0 0 0 0 rgba(34,197,94,0.7),0 8px 20px rgba(34,197,94,0.4)}70%{box-shadow:0 0 0 15px rgba(34,197,94,0),0 8px 20px rgba(34,197,94,0.4)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0),0 8px 20px rgba(34,197,94,0.4)}}
+@keyframes scanLine{0%{top:-10%}100%{top:110%}}
+
+.anim-up{animation:fadeInUp .8s ease-out forwards;opacity:0;animation-play-state:paused}
+.anim-scale{animation:scaleIn .6s ease-out forwards;opacity:0;animation-play-state:paused}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}.d5{animation-delay:.5s}.d6{animation-delay:.6s}.d7{animation-delay:.7s}.d8{animation-delay:.8s}
+
+.shimmer-text{background:linear-gradient(90deg,#fff 0%,#a5b4fc 25%,#fff 50%,#a5b4fc 75%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite}
+
+.scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#6366f1,#8b5cf6,#a855f7);border-radius:0 2px 2px 0;transition:width .1s linear}
+
+.phone-mockup{background:linear-gradient(145deg,#1a1a2e,#16213e,#0f3460);border-radius:28px;border:2px solid rgba(255,255,255,0.15);box-shadow:0 15px 40px rgba(0,0,0,0.5);overflow:hidden}
+.phone-notch{width:60px;height:14px;background:#0a0a0a;border-radius:0 0 10px 10px;margin:0 auto}
+
+.step-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);transition:transform .3s ease,box-shadow .3s ease}
+.step-card:hover{transform:translateY(-4px);box-shadow:0 10px 20px rgba(0,0,0,0.3)}
+.step-num{background:linear-gradient(135deg,#6366f1,#8b5cf6);box-shadow:0 4px 15px rgba(99,102,241,0.4)}
+
+.bank-badge{transition:transform .3s ease}
+.bank-badge:hover{transform:scale(1.05)}
+
+.glass{background:rgba(255,255,255,0.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08)}
+
+.fly-btn-wrap{position:fixed;bottom:28px;right:28px;z-index:40;cursor:pointer}
+.fly-btn-inner{display:flex;align-items:center;gap:10px;padding:12px 24px;border-radius:999px;background:linear-gradient(135deg,#22c55e,#10b981);box-shadow:0 8px 20px rgba(34,197,94,0.4);animation:pulseBtn 1.5s infinite}
+.fly-btn-wrap:active .fly-btn-inner{transform:scale(0.95)}
+.fly-label{color:#fff;font-weight:800;font-size:14px;letter-spacing:0.5px;white-space:nowrap}
+
+.dark-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;visibility:hidden;transition:opacity .4s ease}
+.dark-overlay.active{opacity:1;visibility:visible}
+.dark-overlay .scan-line{position:absolute;left:0;right:0;height:2px;background:rgba(99,102,241,0.6);animation:scanLine 2s linear infinite}
+.dark-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(99,102,241,0.5)}
+.dark-count{font-size:64px;font-weight:800;color:#fff;animation:textGlow 2s ease-in-out infinite;line-height:1}
+.dark-prog-wrap{width:200px;height:3px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden}
+.dark-prog-bar{height:100%;width:0%;background:linear-gradient(90deg,#6366f1,#8b5cf6,#a855f7)}
+.dark-cancel{margin-top:16px;padding:8px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.6);cursor:pointer}
+.dark-cancel:hover{background:rgba(255,255,255,0.1);color:#fff}
+</style>
+</head>
+<body class="min-h-screen text-white">
+
+<div class="scroll-bar" id="scrollBar"></div>
+
+<header class="fixed top-0 w-full z-50 px-6 py-4" style="background:rgba(10,10,10,0.8);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.05)">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <img src="logo.png" alt="Logo RefundQR" class="w-9 h-9 rounded-xl object-cover" onerror="this.style.display='none'">
+      <span class="font-bold text-lg tracking-tight">RefundQR</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-6 text-sm text-neutral-400">
+      <a href="#banks" class="hover:text-white transition-colors">Bank</a>
+      <a href="#steps" class="hover:text-white transition-colors">Langkah</a>
+      <a href="#demo" class="hover:text-white transition-colors">Demo</a>
+      <a href="#warning" class="hover:text-white transition-colors">Status</a>
+    </nav>
+    <div class="hidden sm:flex items-center gap-1.5 text-xs text-green-400 bg-green-400/10 px-3 py-1.5 rounded-full border border-green-400/20">
+      <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>Live
+    </div>
+  </div>
+</header>
+
+<main class="relative z-10 pt-20">
+
+<section class="min-h-screen flex items-center justify-center pb-12 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <div class="anim-up d1 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-300 mb-8">
+      <span class="iconify text-indigo-400" data-icon="lucide:info"></span>
+      Panduan Resmi Refund via QR Code — BCA · MANDIRI · BRI · JATENG
+    </div>
+
+    <h1 class="anim-up d2 text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6">
+      <span class="shimmer-text">Refund Dana</span><br>
+      <span class="text-white/90">via QR Code</span>
+    </h1>
+
+    <p class="anim-up d3 text-neutral-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+      Panduan lengkap 8 langkah untuk melakukan refund dana melalui QR Code<br class="hidden md:block">
+      menggunakan aplikasi mBanking / E-Wallet BCA, Mandiri, BRI, atau Bank Jateng.
+    </p>
+
+    <div id="banks" class="anim-up d4 flex flex-wrap items-center justify-center gap-4 mb-10">
+      <div class="bank-badge flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-sm">BCA</div>
+        <div class="text-left"><div class="text-xs text-neutral-400">Bank</div><div class="text-sm font-semibold">BCA</div></div>
+      </div>
+      <div class="bank-badge flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10">
+        <div class="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center font-bold text-xs text-blue-900">MDR</div>
+        <div class="text-left"><div class="text-xs text-neutral-400">Bank</div><div class="text-sm font-semibold">Mandiri</div></div>
+      </div>
+      <div class="bank-badge flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10">
+        <div class="w-10 h-10 rounded-xl bg-blue-800 flex items-center justify-center font-bold text-sm">BRI</div>
+        <div class="text-left"><div class="text-xs text-neutral-400">Bank</div><div class="text-sm font-semibold">BRI</div></div>
+      </div>
+      <div class="bank-badge flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10">
+        <div class="w-10 h-10 rounded-xl bg-green-700 flex items-center justify-center font-bold text-xs">JTG</div>
+        <div class="text-left"><div class="text-xs text-neutral-400">Bank</div><div class="text-sm font-semibold">Jateng</div></div>
+      </div>
+    </div>
+
+    <div class="anim-up d4 mb-10">
+      <img src="banner.png" alt="Banner Refund QR" class="mx-auto max-w-3xl w-full rounded-2xl border border-white/10 shadow-2xl object-cover" loading="lazy" onerror="this.remove()">
+    </div>
+
+    <div id="demo" class="anim-up d5 flex flex-wrap items-center justify-center gap-6 md:gap-8">
+      
+      <div class="flex flex-col items-center">
+        <div class="phone-mockup w-48 md:w-52">
+          <div class="phone-notch"></div>
+          <div class="p-3 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-blue-400">BCA Mobile</span>
+              <span class="text-xs text-neutral-500">09:41</span>
+            </div>
+            <div class="bg-white/5 rounded-xl p-3 text-center">
+              <div class="text-xs text-neutral-400 mb-2">Scan QR Code</div>
+              <div class="mx-auto w-20 h-20 bg-white rounded-lg p-2">
+                <svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="none"/><rect x="10" y="10" width="30" height="30" fill="black"/><rect x="60" y="10" width="30" height="30" fill="black"/><rect x="10" y="60" width="30" height="30" fill="black"/><rect x="50" y="50" width="10" height="10" fill="black"/><rect x="70" y="60" width="10" height="10" fill="black"/><rect x="60" y="80" width="20" height="10" fill="black"/></svg>
+              </div>
+              <div class="text-xs text-neutral-500 mt-2">Arahkan kamera ke QR</div>
+            </div>
+            <div class="flex items-center gap-2 bg-blue-500/10 rounded-lg p-2">
+              <span class="iconify text-blue-400 text-sm" data-icon="lucide:camera"></span>
+              <span class="text-xs text-blue-300">Scanning...</span>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-3 text-xs text-neutral-500">BCA mBanking</div>
+      </div>
+
+      <div class="flex flex-col items-center">
+        <div class="phone-mockup w-48 md:w-52">
+          <div class="phone-notch"></div>
+          <div class="p-3 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-yellow-400">Mandiri Online</span>
+              <span class="text-xs text-neutral-500">09:41</span>
+            </div>
+            <div class="bg-white/5 rounded-xl p-3 text-center">
+              <div class="text-xs text-neutral-400 mb-2">Konfirmasi Refund</div>
+              <div class="mx-auto w-full bg-white/5 rounded-lg p-2 mb-2">
+                <div class="text-left text-xs text-neutral-400 mb-1">No. Verifikasi QR</div>
+                <div class="bg-white/10 rounded px-2 py-1 text-sm font-mono text-yellow-300 text-center">RF-2847561</div>
+              </div>
+              <div class="mx-auto w-full bg-white/5 rounded-lg p-2">
+                <div class="text-left text-xs text-neutral-400 mb-1">Nominal</div>
+                <div class="bg-white/10 rounded px-2 py-1 text-sm font-mono text-green-300 text-center">Rp 1.500.000</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 bg-yellow-500/10 rounded-lg p-2">
+              <span class="iconify text-yellow-400 text-sm" data-icon="lucide:check-circle"></span>
+              <span class="text-xs text-yellow-300">Terkonfirmasi</span>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-3 text-xs text-neutral-500">Mandiri mBanking</div>
+      </div>
+
+      <div class="flex flex-col items-center">
+        <div class="phone-mockup w-48 md:w-52">
+          <div class="phone-notch"></div>
+          <div class="p-3 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-blue-300">BRImo</span>
+              <span class="text-xs text-neutral-500">09:41</span>
+            </div>
+            <div class="bg-white/5 rounded-xl p-3 text-center space-y-2">
+              <div class="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                <span class="text-xs text-neutral-400">Ref ID</span>
+                <span class="text-xs font-mono text-white">QRF-9912</span>
+              </div>
+              <div class="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                <span class="text-xs text-neutral-400">Bank</span>
+                <span class="text-xs text-white">BRI</span>
+              </div>
+              <div class="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                <span class="text-xs text-neutral-400">Status</span>
+                <span class="text-xs text-green-400 font-semibold">Berhasil</span>
+              </div>
+            </div>
+            <div class="w-full bg-blue-600 rounded-lg py-2 text-center text-xs font-semibold">Konfirmasi</div>
+          </div>
+        </div>
+        <div class="text-center mt-3 text-xs text-neutral-500">BRI mBanking</div>
+      </div>
+
+      <div class="flex flex-col items-center">
+        <div class="phone-mockup w-48 md:w-52">
+          <div class="phone-notch"></div>
+          <div class="p-3 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-green-400">BJB Mobile</span>
+              <span class="text-xs text-neutral-500">09:41</span>
+            </div>
+            <div class="bg-white/5 rounded-xl p-3 text-center space-y-2">
+              <div class="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                <span class="text-xs text-neutral-400">Ref ID</span>
+                <span class="text-xs font-mono text-white">JTG-2210</span>
+              </div>
+              <div class="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                <span class="text-xs text-neutral-400">Bank</span>
+                <span class="text-xs text-white">Jateng</span>
+              </div>
+              <div class="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                <span class="text-xs text-neutral-400">Status</span>
+                <span class="text-xs text-green-400 font-semibold">Sukses</span>
+              </div>
+            </div>
+            <div class="w-full bg-green-700 rounded-lg py-2 text-center text-xs font-semibold">Konfirmasi</div>
+          </div>
+        </div>
+        <div class="text-center mt-3 text-xs text-neutral-500">Bank Jateng Mobile</div>
+      </div>
+
+    </div>
+
+    <div class="anim-up d6 mt-14 flex flex-col items-center gap-2 text-neutral-500">
+      <span class="text-xs">Scroll untuk panduan lengkap</span>
+      <span class="iconify text-lg animate-bounce" data-icon="lucide:chevron-down"></span>
+    </div>
+  </div>
+</section>
+
+<section id="steps" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="anim-up inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-300 mb-4">
+        <span class="iconify" data-icon="lucide:list-ordered"></span>8 Langkah Mudah
+      </div>
+      <h2 class="anim-up d1 text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        Panduan Refund <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Step by Step</span>
+      </h2>
+      <p class="anim-up d2 text-neutral-400 max-w-lg mx-auto">Ikuti setiap langkah berikut untuk menyelesaikan proses refund dana via QR Code</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      
+      <div class="step-card rounded-2xl p-6 flex gap-4 anim-up d1">
+        <div class="flex-shrink-0"><div class="step-num w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold">1</div></div>
+        <div>
+          <h3 class="text-base font-semibold mb-2 flex items-center gap-2"><span class="iconify text-indigo-400" data-icon="lucide:scan-line"></span>Scan QR Code Admin</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">Buka aplikasi mBanking / E-Wallet Anda, pilih menu <strong class="text-neutral-300">QR Scan</strong>, lalu arahkan kamera ke QR Code yang disediakan oleh Admin atau petugas terkait.</p>
+          <div class="mt-3 flex items-center gap-2">
+            <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-xs font-bold">B</div>
+            <div class="w-6 h-6 rounded bg-yellow-500 flex items-center justify-center text-xs font-bold text-blue-900">M</div>
+            <div class="w-6 h-6 rounded bg-blue-800 flex items-center justify-center text-xs font-bold">B</div>
+            <div class="w-6 h-6 rounded bg-green-700 flex items-center justify-center text-xs font-bold">J</div>
+            <span class="text-xs text-neutral-500">Semua bank</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card rounded-2xl p-6 flex gap-4 anim-up d2">
+        <div class="flex-shrink-0"><div class="step-num w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold">2</div></div>
+        <div>
+          <h3 class="text-base font-semibold mb-2 flex items-center gap-2"><span class="iconify text-indigo-400" data-icon="lucide:key-round"></span>Angka Verifikasi QR</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">Setelah scan berhasil, akan muncul <strong class="text-neutral-300">Angka Verifikasi QR</strong> di layar. Angka ini <strong class="text-amber-300">hanya digunakan untuk Confirmation Refund / Pengembalian</strong> — bukan untuk transaksi lain.</p>
+          <div class="mt-3 flex items-center gap-2">
+            <div class="inline-flex items-center gap-1.5 bg-white/5 rounded-lg px-3 py-1.5 text-xs font-mono text-indigo-300 border border-white/10"><span class="iconify text-xs" data-icon="lucide:hash"></span>RF-2847561</div>
+            <span class="text-xs text-amber-400 flex items-center gap-1"><span class="iconify text-xs" data-icon="lucide:alert-triangle"></span>Khusus Refund</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card rounded-2xl p-6 flex gap-4 anim-up d3 md:col-span-2">
+        <div class="flex-shrink-0"><div class="step-num w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold">3</div></div>
+        <div class="flex-1">
+          <h3 class="text-base font-semibold mb-2 flex items-center gap-2"><span class="iconify text-indigo-400" data-icon="lucide:lock"></span>Verifikasi Refund — Input PIN & Pilih Opsi</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-4">Lanjutkan proses verifikasi refund. Masukkan <strong class="text-neutral-300">PIN Account M-Banking / E-Wallet</strong> Anda, lalu klik <strong class="text-neutral-300">OK</strong>. Setelah memasukkan PIN, akan muncul <strong class="text-neutral-300">2 opsi pilihan</strong>:</p>
+          <div class="grid sm:grid-cols-2 gap-3 mb-4">
+            <div class="relative rounded-xl p-4 border-2 border-green-500/30 bg-green-500/5">
+              <div class="absolute -top-2.5 left-3 px-2 py-0.5 rounded-full bg-green-500 text-xs font-bold text-white">PILIH INI</div>
+              <div class="flex items-center gap-3 mt-1">
+                <div class="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center"><span class="text-sm font-bold text-green-400">1</span></div>
+                <div><div class="text-sm font-semibold text-green-300">Refund / Pengembalian Dana</div><div class="text-xs text-neutral-500 mt-0.5">Klik opsi ini untuk melanjutkan refund</div></div>
+              </div>
+            </div>
+            <div class="relative rounded-xl p-4 border border-white/10 bg-white/[0.02]">
+              <div class="absolute -top-2.5 left-3 px-2 py-0.5 rounded-full bg-neutral-700 text-xs font-medium text-neutral-300">JANGAN PILIH</div>
+              <div class="flex items-center gap-3 mt-1">
+                <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center"><span class="text-sm font-bold text-neutral-500">2</span></div>
+                <div><div class="text-sm font-medium text-neutral-500">Pembayaran Ulang</div><div class="text-xs text-neutral-600 mt-0.5">Bukan opsi untuk refund</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-amber-300 bg-amber-500/5 rounded-lg px-3 py-2 border border-amber-500/10">
+            <span class="iconify" data-icon="lucide:alert-triangle"></span>
+            <span>Pastikan memilih <strong>Opsi 1 — Refund/Pengembalian Dana</strong> agar dana dikembalikan ke rekening Anda</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card rounded-2xl p-6 flex gap-4 anim-up d4">
+        <div class="flex-shrink-0"><div class="step-num w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold">4</div></div>
+        <div>
+          <h3 class="text-base font-semibold mb-2 flex items-center gap-2"><span class="iconify text-indigo-400" data-icon="lucide:banknote"></span>Isi Nominal Refund</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">Silahkan masukkan jumlah nominal yang akan di refund <strong class="text-neutral-300">sesuai bukti yang telah di-upload</strong>. Pastikan nominal yang dimasukkan tepat dan sesuai dengan nilai pengembalian yang tercantum pada bukti transaksi Anda.</p>
+          <div class="mt-3 flex items-center gap-2">
+            <div class="inline-flex items-center gap-1.5 bg-green-500/10 rounded-lg px-3 py-1.5 text-xs font-mono text-green-300 border border-green-500/20"><span class="iconify text-xs" data-icon="lucide:wallet"></span>Rp 1.500.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card rounded-2xl p-6 flex gap-4 anim-up d5">
+        <div class="flex-shrink-0"><div class="step-num w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold">5</div></div>
+        <div>
+          <h3 class="text-base font-semibold mb-2 flex items-center gap-2"><span class="iconify text-indigo-400" data-icon="lucide:file-check-2"></span>Konfirmasi Data Refund</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">Periksa kembali seluruh <strong class="text-neutral-300">detail refund</strong>: nama penerima, nomor rekening, nominal, dan nomor verifikasi. Pastikan semua data sudah benar.</p>
+        </div>
+      </div>
+
+      <div class="step-card rounded-2xl p-6 flex gap-4 anim-up d6">
+        <div class="flex-shrink-0"><div class="step-num w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold">6</div></div>
+        <div>
+          <h3 class="text-base font-semibold mb-2 flex items-center gap-2"><span class="iconify text-indigo-400" data-icon="lucide:shield-check"></span>Input PIN mBanking</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">Masukkan <strong class="text-neutral-300">PIN mBanking</strong> Anda untuk mengotorisasi transaksi. Jangan berikan PIN kepada siapa pun termasuk Admin.</p>
+        </div>
+      </div>
+
+      <div class="step-card rounded-2xl p-6 flex gap-4 anim-up d7">
+        <div class="flex-shrink-0"><div class="step-num w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold">7</div></div>
+        <div>
+          <h3 class="text-base font-semibold mb-2 flex items-center gap-2"><span class="iconify text-indigo-400" data-icon="lucide:loader-2"></span>Tunggu Proses Verifikasi</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">Sistem akan memproses dan <strong class="text-neutral-300">memverifikasi transaksi refund</strong>. Proses ini biasanya memakan waktu 1-3 menit tergantung bank.</p>
+        </div>
+      </div>
+
+      <div class="step-card rounded-2xl p-6 flex gap-4 anim-up d8 md:col-span-2">
+        <div class="flex-shrink-0"><div class="w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold" style="background:linear-gradient(135deg,#22c55e,#10b981);box-shadow:0 4px 15px rgba(34,197,94,0.4)">8</div></div>
+        <div>
+          <h3 class="text-base font-semibold mb-2 flex items-center gap-2"><span class="iconify text-green-400" data-icon="lucide:circle-check-big"></span>Refund Berhasil!</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">Dana refund berhasil dikembalikan ke rekening Anda. Simpan <strong class="text-neutral-300">bukti transaksi</strong> sebagai referensi. Cek saldo untuk memastikan dana sudah masuk.</p>
+          <div class="mt-3 inline-flex items-center gap-1.5 bg-green-500/10 rounded-lg px-3 py-1.5 text-xs text-green-300 border border-green-500/20"><span class="iconify" data-icon="lucide:check-circle-2"></span>Transaksi Selesai — Dana telah dikembalikan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-3">Alur Proses <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Refund</span></h2>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <div class="glass rounded-xl px-4 py-3 text-center anim-scale d1"><span class="iconify text-2xl text-indigo-400 mb-1" data-icon="lucide:scan-line"></span><div class="text-xs font-medium">Scan QR</div></div>
+      <span class="iconify text-neutral-600 text-xl" data-icon="lucide:chevron-right"></span>
+      <div class="glass rounded-xl px-4 py-3 text-center anim-scale d2"><span class="iconify text-2xl text-indigo-400 mb-1" data-icon="lucide:key-round"></span><div class="text-xs font-medium">Angka Verif</div></div>
+      <span class="iconify text-neutral-600 text-xl" data-icon="lucide:chevron-right"></span>
+      <div class="glass rounded-xl px-4 py-3 text-center anim-scale d3"><span class="iconify text-2xl text-indigo-400 mb-1" data-icon="lucide:lock"></span><div class="text-xs font-medium">PIN + Opsi</div></div>
+      <span class="iconify text-neutral-600 text-xl" data-icon="lucide:chevron-right"></span>
+      <div class="glass rounded-xl px-4 py-3 text-center anim-scale d4"><span class="iconify text-2xl text-indigo-400 mb-1" data-icon="lucide:banknote"></span><div class="text-xs font-medium">Nominal</div></div>
+      <span class="iconify text-neutral-600 text-xl" data-icon="lucide:chevron-right"></span>
+      <div class="glass rounded-xl px-4 py-3 text-center anim-scale d5"><span class="iconify text-2xl text-green-400 mb-1" data-icon="lucide:circle-check-big"></span><div class="text-xs font-medium text-green-300">Selesai</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="warning" class="py-16 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="glass rounded-2xl p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center"><span class="iconify text-xl text-amber-400" data-icon="lucide:alert-triangle"></span></div>
+        <h2 class="text-xl md:text-2xl font-bold tracking-tight">Peringatan Keamanan</h2>
+      </div>
+      <div class="space-y-4 text-neutral-300 text-sm md:text-base">
+        <p class="flex items-start gap-2"><span class="iconify text-amber-400 mt-1" data-icon="lucide:shield-alert"></span>Pastikan tidak memberikan PIN mBanking kepada siapa pun.</p>
+        <p class="flex items-start gap-2"><span class="iconify text-amber-400 mt-1" data-icon="lucide:eye-off"></span>Periksa URL aplikasi dan pastikan berada di aplikasi resmi bank.</p>
+        <p class="flex items-start gap-2"><span class="iconify text-amber-400 mt-1" data-icon="lucide:lock"></span>Refund tidak dipungut biaya. Waspadai peminta biaya admin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="dark-overlay" id="loadingOverlay">
+  <div class="scan-line"></div>
+  <div class="dark-icon">
+    <span class="iconify text-white text-4xl animate-spin" data-icon="lucide:loader-2"></span>
+  </div>
+  <div class="dark-count" id="countdownText">3</div>
+  <div class="dark-prog-wrap">
+    <div class="dark-prog-bar" id="progBar"></div>
+  </div>
+  <button class="dark-cancel" id="cancelBtn">Batal</button>
+</div>
+
+<div class="fly-btn-wrap" id="flyBtn">
+  <div class="fly-btn-inner">
+    <span class="iconify text-white text-xl" data-icon="lucide:banknote"></span>
+    <div class="fly-label">KLIK DISINI UNTUK REFUND</div>
+  </div>
+</div>
+
+<footer class="py-10 px-6 text-center text-neutral-500 text-sm border-t border-white/5 relative z-10">
+  <p>© 2023 RefundQR. Panduan Edukasi Transaksi Digital.</p>
+</footer>
+
+<script>
+// Optimized Scroll Listener with requestAnimationFrame
+const scrollBar = document.getElementById('scrollBar');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const progress = (scrollTop / scrollHeight) * 100;
+      scrollBar.style.width = progress + '%';
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// Optimized Intersection Observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+      observer.unobserve(entry.target); 
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.anim-up, .anim-scale').forEach(el => observer.observe(el));
+
+// Fly Button Logic
+const flyBtn = document.getElementById('flyBtn');
+const loadingOverlay = document.getElementById('loadingOverlay');
+const countdownText = document.getElementById('countdownText');
+const progBar = document.getElementById('progBar');
+const cancelBtn = document.getElementById('cancelBtn');
+
+let isLoading = false; 
+let loadingTimeout, countdownInterval;
+
+flyBtn.addEventListener('click', () => {
+  if (isLoading) return;
+  isLoading = true;
+  
+  loadingOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  let timeLeft = 3;
+  countdownText.textContent = timeLeft;
+  
+  progBar.style.transition = 'none';
+  progBar.style.width = '0%';
+  
+  setTimeout(() => {
+    progBar.style.transition = 'width 3s linear';
+    progBar.style.width = '100%';
+  }, 50);
+
+  countdownInterval = setInterval(() => {
+    timeLeft--;
+    if (timeLeft > 0) {
+      countdownText.textContent = timeLeft;
+    } else {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  loadingTimeout = setTimeout(() => {
+    window.location.href = 'qr.html';
+  }, 3000);
+});
+
+cancelBtn.addEventListener('click', () => {
+  clearTimeout(loadingTimeout);
+  clearInterval(countdownInterval);
+  loadingOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+  progBar.style.transition = 'none';
+  progBar.style.width = '0%';
+  isLoading = false;
+});
+</script>
+
+</body>
+</html>
