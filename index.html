@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0284c7">
+<meta name="description" content="Portal resmi pengajuan pengembalian dana (refund) dengan verifikasi berlapis dan enkripsi SSL 256-bit.">
+<meta name="keywords" content="refund, pengembalian dana, portal resmi, pengajuan">
+<meta name="author" content="PortalRefund">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pengembalian / Refund — Portal Resmi">
+<meta property="og:description" content="Ajukan permohonan pengembalian dana dengan aman dan terverifikasi.">
+<meta property="og:image" content="poster.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pengembalian / Refund — Portal Resmi">
+<meta name="twitter:image" content="poster.png">
+
+<title>Pengembalian / Refund — Portal Resmi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="logo.png">
+<link rel="preload" as="image" href="background.png">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  :root {
+    --bg: #f8fafc;
+    --fg: #0f172a;
+    --accent: #0284c7;
+    --accent-2: #0ea5e9;
+    --danger: #ef4444;
+    --card: #ffffff;
+    --border: #e2e8f0;
+  }
+
+  * { font-family: 'Manrope', sans-serif; }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .bg-image {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+  }
+
+  .bg-mesh {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.1), transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(2, 132, 199, 0.1), transparent 40%);
+  }
+  .grid-pattern {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+  .orb {
+    position: fixed; border-radius: 50%; filter: blur(100px);
+    opacity: 0.4; z-index: 0; pointer-events: none;
+    animation: float 15s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0,0); }
+    50% { transform: translate(40px, -40px); }
+  }
+
+  .card-glass {
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 30px -5px rgba(2, 132, 199, 0.05);
+  }
+  .glow-sky {
+    box-shadow: 0 0 0 1px var(--border), 0 20px 50px -10px rgba(2, 132, 199, 0.15);
+  }
+
+  .input-field {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    color: var(--fg);
+    transition: all 0.25s ease;
+  }
+  .input-field:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--card);
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+  }
+  .input-field::placeholder { color: #94a3b8; }
+  select.input-field {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.5rem;
+  }
+  select.input-field option { background: var(--card); color: var(--fg); }
+
+  .custom-checkbox {
+    appearance: none; -webkit-appearance: none;
+    width: 24px; height: 24px;
+    border: 2px solid var(--border);
+    border-radius: 7px;
+    background: #f8fafc;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .custom-checkbox:hover { border-color: var(--accent); }
+  .custom-checkbox:checked {
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    border-color: var(--accent);
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
+  }
+  .custom-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 7px; top: 2px;
+    width: 6px; height: 12px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+  .custom-checkbox:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .dropzone {
+    border: 2px dashed var(--border);
+    background: #f8fafc;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .dropzone:hover, .dropzone.dragover, .dropzone:focus-visible {
+    border-color: var(--accent);
+    background: rgba(2, 132, 199, 0.03);
+    outline: none;
+  }
+  .dropzone.has-file {
+    border-color: var(--accent);
+    border-style: solid;
+    background: rgba(2, 132, 199, 0.03);
+  }
+
+  .btn-submit {
+    background: #e2e8f0;
+    color: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-submit:not(:disabled) {
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+  }
+  .btn-submit:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(2, 132, 199, 0.35);
+  }
+  .btn-submit:not(:disabled)::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+  }
+  .btn-submit:not(:disabled):hover::before { left: 100%; }
+  .btn-submit:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .loading-overlay {
+    position: fixed; inset: 0;
+    background: rgba(248, 250, 252, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .loading-overlay.active { display: flex; }
+  
+  .spinner-ring { 
+    width: 140px; height: 140px; position: relative;
+    filter: drop-shadow(0 0 15px rgba(2, 132, 199, 0.2));
+  }
+  .spinner-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .spinner-ring circle { fill: none; stroke-width: 6; stroke-linecap: round; }
+  .spinner-ring .bg-circle { stroke: rgba(226, 232, 240, 0.6); }
+  .spinner-ring .progress-circle {
+    stroke: url(#spinnerGradient);
+    stroke-dasharray: 408.4;
+    stroke-dashoffset: 408.4;
+  }
+  .status-text { animation: fadeInUp 0.4s ease; }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-badge {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.1), rgba(2, 132, 199, 0.02));
+    border: 1px solid rgba(2, 132, 199, 0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+  }
+  .shield-pulse { animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .toast-container {
+    position: fixed; bottom: 30px; right: 30px; z-index: 200;
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: calc(100vw - 60px);
+    pointer-events: none;
+  }
+  .toast {
+    transform: translateX(140%);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: auto;
+  }
+  .toast.show { transform: translateX(0); }
+
+  .field-error { border-color: var(--danger) !important; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important; }
+  .currency-prefix { color: #64748b; font-weight: 600; }
+  .hero-pill {
+    background: rgba(2, 132, 199, 0.05);
+    border: 1px solid rgba(2, 132, 199, 0.15);
+    color: var(--accent);
+  }
+
+  .banner-wrap {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -10px rgba(2, 132, 199, 0.2);
+    aspect-ratio: 21 / 9;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  }
+  .banner-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .banner-fallback {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #075985 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+  }
+  .poster-wrap {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -10px rgba(2, 132, 199, 0.15);
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  }
+  .poster-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .poster-fallback {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #e0f2fe 0%, #7dd3fc 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #0284c7;
+  }
+  .logo-img { width: 44px; height: 44px; object-fit: contain; border-radius: 12px; }
+  .logo-fallback {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(to bottom right, #0ea5e9, #0284c7);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 16px -4px rgba(2, 132, 199, 0.3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .orb { animation: none; }
+  }
+
+  @media print {
+    .bg-mesh, .grid-pattern, .orb, .bg-image, .loading-overlay, .toast-container, header, footer { display: none !important; }
+    body { background: white; }
+    .card-glass { box-shadow: none; border: 1px solid #ccc; }
+  }
+
+  @media (max-width: 640px) {
+    .toast-container { bottom: 16px; right: 16px; left: 16px; max-width: none; }
+    .toast { transform: translateY(140%); }
+    .toast.show { transform: translateY(0); }
+    .spinner-ring { width: 100px; height: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-image" aria-hidden="true"></div>
+<div class="bg-mesh" aria-hidden="true"></div>
+<div class="grid-pattern" aria-hidden="true"></div>
+<div class="orb" style="width:500px;height:500px;background:#0ea5e9;top:-150px;left:-150px;" aria-hidden="true"></div>
+<div class="orb" style="width:400px;height:400px;background:#0284c7;bottom:-100px;right:-100px;animation-delay:-5s;opacity:0.2;" aria-hidden="true"></div>
+
+<a href="#refundForm" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-sky-700 focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">
+  Lewati ke formulir
+</a>
+
+<header class="relative z-10 border-b border-slate-200/80 bg-white/50 backdrop-blur-md">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="relative">
+        <img src="logo.png" alt="Logo PortalRefund" class="logo-img"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="logo-fallback" style="display:none;">
+          <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+        </div>
+        <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white shield-pulse" aria-hidden="true"></span>
+      </div>
+      <div>
+        <div class="font-display font-bold text-lg leading-none tracking-tight text-slate-900">PortalRefund</div>
+        <div class="text-xs text-slate-500 mt-1">Sistem Pengembalian Resmi</div>
+      </div>
+    </div>
+    <div class="hidden md:flex items-center gap-2 text-xs text-slate-600 px-4 py-2 rounded-full bg-slate-100/80 border border-slate-200">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 shield-pulse" aria-hidden="true"></span>
+      Koneksi Aman · Terenkripsi SSL 256-bit
+    </div>
+  </div>
+</header>
+
+<main class="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
+
+  <section class="reveal mb-10 max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-3 text-center md:text-left">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full hero-pill text-xs font-medium mb-6">
+          <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+          Formulir Pengajuan Resmi · Verifikasi Berlapis
+        </div>
+        <h1 class="font-display text-4xl md:text-5xl font-bold leading-tight mb-4 tracking-tight text-slate-900">
+          Pengembalian <span class="bg-gradient-to-r from-sky-600 to-sky-800 bg-clip-text text-transparent">Refund</span>
+        </h1>
+        <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+          Silakan lengkapi formulir di bawah ini untuk mengajukan permohonan pengembalian dana. Pastikan seluruh data yang Anda berikan akurat sesuai dengan informasi pembayaran asli.
+        </p>
+      </div>
+      <div class="md:col-span-2">
+        <div class="banner-wrap">
+          <img src="banner.png" alt="Banner Pengembalian Dana"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="banner-fallback" style="display:none;">
+            <div class="text-center p-6">
+              <i class="fa-solid fa-money-bill-transfer text-5xl mb-3 opacity-90" aria-hidden="true"></i>
+              <div class="font-display font-bold text-xl">Pengembalian Dana</div>
+              <div class="text-sm opacity-80 mt-1">Aman · Cepat · Terverifikasi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal mb-8 card-glass rounded-2xl p-6 md:p-8">
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="md:col-span-1">
+        <div class="poster-wrap mb-5">
+          <img src="poster.png" alt="Panduan Pengembalian Dana"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="poster-fallback" style="display:none;">
+            <div class="text-center p-6">
+              <i class="fa-solid fa-list-check text-5xl mb-3 opacity-80" aria-hidden="true"></i>
+              <div class="font-display font-bold text-base">Panduan Resmi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center">
+            <i class="fa-solid fa-circle-info text-sky-600" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="font-display text-xl font-bold text-slate-900">Syarat & Ketentuan</h2>
+            <p class="text-xs text-slate-500">QR Pengembalian / Refund</p>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <div class="flex gap-4">
+            <div class="step-badge" aria-hidden="true">1</div>
+            <div>
+              <h3 class="font-semibold mb-1.5 text-slate-800">Identitas Penerima</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">Nama penerima harus <span class="text-sky-600 font-medium">sama persis</span> dengan nama yang melakukan pembayaran yang akan direfund. Ketidaksesuaian nama akan menyebabkan pengajuan ditolak otomatis oleh sistem.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-badge" aria-hidden="true">2</div>
+            <div>
+              <h3 class="font-semibold mb-1.5 text-slate-800">Ikuti Petunjuk & Langkah</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">Ikuti petunjuk dan langkah-langkah melakukan QR Pengembalian <span class="text-sky-600 font-medium">sesuai waktu yang telah ditentukan</span>. Penundaan atau kesalahan urutan dapat memengaruhi keberhasilan proses refund.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-badge" aria-hidden="true">3</div>
+            <div>
+              <h3 class="font-semibold mb-1.5 text-slate-800">Pilih Opsi yang Tepat</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">Pada pilihan 2 opsi, pastikan <span class="text-rose-600 font-medium">tidak salah memilih</span>. Wajib memilih pilihan <span class="text-sky-600 font-medium">No.1 yaitu Refund / Pengembalian Dana</span>. Kesalahan pemilihan opsi akan mengarahkan Anda ke prosedur yang berbeda.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal card-glass rounded-2xl p-6 md:p-10 glow-sky">
+    <form id="refundForm" class="space-y-8" novalidate autocomplete="on">
+
+      <div>
+        <div class="flex items-center gap-2 mb-5">
+          <i class="fa-solid fa-user-circle text-sky-600" aria-hidden="true"></i>
+          <h3 class="font-display text-lg font-semibold text-slate-900">Data Pemohon</h3>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div>
+            <label for="nama" class="block text-sm font-medium text-slate-700 mb-2">Nama Lengkap <span class="text-rose-500" aria-hidden="true">*</span></label>
+            <input type="text" id="nama" name="nama" required autocomplete="name"
+              class="input-field w-full px-4 py-3 rounded-xl" placeholder="Sesuai dengan nama pembayar">
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700 mb-2">E-mail Aktif <span class="text-rose-500" aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" required autocomplete="email"
+              class="input-field w-full px-4 py-3 rounded-xl" placeholder="nama@email.com">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-2 mb-5">
+          <i class="fa-solid fa-building-columns text-sky-600" aria-hidden="true"></i>
+          <h3 class="font-display text-lg font-semibold text-slate-900">Data Rekening Penerima</h3>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div>
+            <label for="namaRekening" class="block text-sm font-medium text-slate-700 mb-2">Nama Rekening Penerima <span class="text-rose-500" aria-hidden="true">*</span></label>
+            <input type="text" id="namaRekening" name="namaRekening" required autocomplete="off"
+              class="input-field w-full px-4 py-3 rounded-xl" placeholder="Nama pemilik rekening tujuan">
+          </div>
+          <div>
+            <label for="nomorRekening" class="block text-sm font-medium text-slate-700 mb-2">Nomor Rekening Penerima <span class="text-rose-500" aria-hidden="true">*</span></label>
+            <input type="text" id="nomorRekening" name="nomorRekening" required inputmode="numeric" autocomplete="off"
+              class="input-field w-full px-4 py-3 rounded-xl" placeholder="0000123456789" maxlength="20">
+          </div>
+          <div>
+            <label for="bank" class="block text-sm font-medium text-slate-700 mb-2">Jenis Bank <span class="text-rose-500" aria-hidden="true">*</span></label>
+            <select id="bank" name="bank" required class="input-field w-full px-4 py-3 rounded-xl">
+              <option value="">— Pilih Bank —</option>
+              <option value="BCA">Bank BCA</option>
+              <option value="BNI">Bank BNI</option>
+              <option value="BRI">Bank BRI</option>
+              <option value="Mandiri">Bank Mandiri</option>
+              <option value="CIMB Niaga">Bank CIMB Niaga</option>
+              <option value="Permata">Bank Permata</option>
+              <option value="Danamon">Bank Danamon</option>
+              <option value="BSI">Bank Syariah Indonesia</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
+          <div>
+            <label for="nominalInput" class="block text-sm font-medium text-slate-700 mb-2">Nominal yang Akan Direfund <span class="text-rose-500" aria-hidden="true">*</span></label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 currency-prefix pointer-events-none" aria-hidden="true">Rp</span>
+              <input type="text" id="nominalInput" name="nominal" required inputmode="numeric" autocomplete="off"
+                class="input-field w-full pl-12 pr-4 py-3 rounded-xl" placeholder="0" aria-describedby="nominalHelp">
+            </div>
+            <p id="nominalHelp" class="text-xs text-slate-400 mt-1.5">Masukkan nominal dalam Rupiah tanpa simbol.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-2 mb-5">
+          <i class="fa-solid fa-paperclip text-sky-600" aria-hidden="true"></i>
+          <h3 class="font-display text-lg font-semibold text-slate-900">Bukti Pembayaran</h3>
+        </div>
+        <label for="fileInput" class="block text-sm font-medium text-slate-700 mb-2">Upload Bukti Pembayaran yang Akan Direfund <span class="text-rose-500" aria-hidden="true">*</span></label>
+        <div id="dropzone" class="dropzone rounded-xl p-8 text-center"
+             role="button" tabindex="0"
+             aria-label="Unggah bukti pembayaran. Klik atau tarik file ke sini.">
+          <input type="file" id="fileInput" name="bukti" accept="image/*,application/pdf" class="hidden">
+          <div id="dropzoneDefault">
+            <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center">
+              <i class="fa-solid fa-cloud-arrow-up text-sky-600 text-xl" aria-hidden="true"></i>
+            </div>
+            <p class="font-medium text-slate-800">Klik untuk memilih file atau drag &amp; drop</p>
+            <p class="text-xs text-slate-500 mt-1">Format: JPG, PNG, PDF · Maks 10MB</p>
+          </div>
+          <div id="dropzoneFile" class="hidden">
+            <div class="flex items-center justify-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center">
+                <i class="fa-solid fa-file-circle-check text-sky-600 text-xl" aria-hidden="true"></i>
+              </div>
+              <div class="text-left">
+                <div id="fileName" class="font-medium text-slate-800 text-sm max-w-xs truncate"></div>
+                <div id="fileSize" class="text-xs text-slate-500"></div>
+              </div>
+              <button type="button" id="removeFile" class="ml-3 w-8 h-8 rounded-full bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-500 transition flex items-center justify-center" aria-label="Hapus file">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="flex items-start gap-3 cursor-pointer p-5 rounded-xl border border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 transition">
+          <input type="checkbox" id="persetujuan" name="persetujuan" class="custom-checkbox mt-0.5">
+          <span class="text-sm text-slate-600 leading-relaxed">
+            <strong class="text-slate-900 block mb-1.5">Pernyataan Pertanggungjawaban:</strong>
+            Dengan menandai kotak ini, saya menyatakan bahwa seluruh data yang saya isi pada formulir ini adalah <span class="text-sky-600 font-medium">benar, akurat, dan dapat dipertanggungjawabkan secara hukum</span>. Saya memahami bahwa pengisian data yang tidak sesuai akan mengakibatkan kegagalan proses pengembalian dana. Saya juga menyetujui ketentuan bahwa nama penerima harus sama dengan nama yang melakukan pembayaran awal, serta bersedia mengikuti seluruh petunjuk QR Pengembalian sesuai waktu yang telah ditentukan oleh sistem.
+          </span>
+        </label>
+      </div>
+
+      <div>
+        <button type="submit" id="submitBtn" disabled
+          class="btn-submit w-full py-4 rounded-xl font-display font-bold text-base tracking-wide flex items-center justify-center gap-3"
+          aria-disabled="true">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          AJUKAN REFUND
+        </button>
+        <p id="hintText" class="text-center text-xs text-slate-500 mt-3" role="status" aria-live="polite">
+          <i class="fa-solid fa-lock mr-1" aria-hidden="true"></i>
+          Unggah bukti pembayaran dan centang pernyataan untuk mengaktifkan tombol.
+        </p>
+      </div>
+    </form>
+  </section>
+
+  <footer class="mt-12 pt-8 border-t border-slate-200 text-center text-xs text-slate-500">
+    <p>&copy; <span id="year"></span> PortalRefund. Sistem Pengembalian Dana Resmi.</p>
+  </footer>
+
+</main>
+
+<div class="loading-overlay" id="loadingOverlay" role="dialog" aria-modal="true" aria-labelledby="loadingTitle" aria-describedby="loadingStatus">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="spinnerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0ea5e9"/>
+        <stop offset="100%" stop-color="#0284c7"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="text-center max-w-md px-6">
+    <div class="relative mx-auto mb-8 w-[140px] h-[140px]">
+      <div class="spinner-ring">
+        <svg viewBox="0 0 150 150" aria-hidden="true">
+          <circle class="bg-circle" cx="75" cy="75" r="65"/>
+          <circle class="progress-circle" id="progressCircle" cx="75" cy="75" r="65"/>
+        </svg>
+      </div>
+      <div class="absolute inset-0 flex flex-col items-center justify-center">
+        <span id="loadingPercent" class="font-display text-3xl font-bold text-slate-900">0%</span>
+      </div>
+    </div>
+
+    <h3 class="font-display text-2xl font-bold mb-2 text-slate-900" id="loadingTitle">Memproses Pengajuan</h3>
+    <p class="text-slate-500 text-sm mb-6 status-text" id="loadingStatus">Memeriksa kelengkapan data yang Anda masukkan...</p>
+
+    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="h-full bg-gradient-to-r from-sky-500 to-sky-700 rounded-full" id="loadingProgress" style="width:0%; transition: width 0.2s linear;"></div>
+    </div>
+
+    <p class="text-xs text-slate-400 mt-6">
+      <i class="fa-solid fa-lock mr-1" aria-hidden="true"></i>
+      Sistem sedang mengenkripsi data Anda. Mohon tunggu hingga proses selesai.
+    </p>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="false"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  const storage = {
+    set(key, value) {
+      try { localStorage.setItem(key, value); return true; }
+      catch (e) { return false; }
+    },
+    get(key) {
+      try { return localStorage.getItem(key); }
+      catch (e) { return null; }
+    },
+    remove(key) {
+      try { localStorage.removeItem(key); }
+      catch (e) {}
+    }
+  };
+
+  const form = document.getElementById('refundForm');
+  const nominalInput = document.getElementById('nominalInput');
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const dropzoneDefault = document.getElementById('dropzoneDefault');
+  const dropzoneFile = document.getElementById('dropzoneFile');
+  const fileName = document.getElementById('fileName');
+  const fileSize = document.getElementById('fileSize');
+  const removeFileBtn = document.getElementById('removeFile');
+  const persetujuan = document.getElementById('persetujuan');
+  const submitBtn = document.getElementById('submitBtn');
+  const hintText = document.getElementById('hintText');
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  const loadingStatus = document.getElementById('loadingStatus');
+  const loadingTitle = document.getElementById('loadingTitle');
+  const loadingProgress = document.getElementById('loadingProgress');
+  const loadingPercent = document.getElementById('loadingPercent');
+  const progressCircle = document.getElementById('progressCircle');
+  const toastContainer = document.getElementById('toastContainer');
+
+  function formatRupiah(angka) {
+    const n = String(angka).replace(/\D/g, '');
+    return n ? parseInt(n, 10).toLocaleString('id-ID') : '';
+  }
+  
+  function parseRupiah(str) {
+    return String(str || '').replace(/\D/g, '');
+  }
+  
+  nominalInput.addEventListener('input', (e) => {
+    const val = formatRupiah(e.target.value);
+    e.target.value = val;
+    e.target.setSelectionRange(val.length, val.length);
+    saveDraft();
+  });
+  
+  nominalInput.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData('text');
+    const val = formatRupiah(text);
+    e.target.value = val;
+    e.target.setSelectionRange(val.length, val.length);
+    saveDraft();
+  });
+
+  const nomorRekeningInput = document.getElementById('nomorRekening');
+  nomorRekeningInput.addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '');
+    saveDraft();
+  });
+
+  let selectedFile = null;
+
+  dropzone.addEventListener('click', (e) => {
+    if (e.target.closest('#removeFile')) return;
+    fileInput.click();
+  });
+  
+  dropzone.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+  
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.classList.add('dragover');
+  });
+  
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+  
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    const dt = e.dataTransfer;
+    if (dt && dt.files && dt.files.length) {
+      try {
+        fileInput.files = dt.files;
+      } catch (err) {
+        const dt2 = new DataTransfer();
+        dt2.items.add(dt.files[0]);
+        fileInput.files = dt2.files;
+      }
+      handleFileSelect();
+    }
+  });
+  
+  fileInput.addEventListener('change', handleFileSelect);
+  
+  removeFileBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    clearFile();
+  });
+
+  function clearFile() {
+    fileInput.value = '';
+    selectedFile = null;
+    dropzone.classList.remove('has-file');
+    dropzoneDefault.classList.remove('hidden');
+    dropzoneFile.classList.add('hidden');
+    updateSubmitState();
+  }
+
+  function handleFileSelect() {
+    if (!fileInput.files || !fileInput.files.length) return;
+    const file = fileInput.files[0];
+
+    if (file.size > 10 * 1024 * 1024) {
+      showToast('File Terlalu Besar', 'Maksimal ukuran file 10MB.', 'warn');
+      fileInput.value = '';
+      selectedFile = null;
+      return;
+    }
+
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
+    if (allowedTypes.indexOf(file.type) === -1) {
+      showToast('Format Tidak Didukung', 'Gunakan format JPG, PNG, atau PDF.', 'warn');
+      fileInput.value = '';
+      selectedFile = null;
+      return;
+    }
+
+    selectedFile = file;
+    fileName.textContent = file.name;
+    fileSize.textContent = formatBytes(file.size);
+    dropzone.classList.add('has-file');
+    dropzoneDefault.classList.add('hidden');
+    dropzoneFile.classList.remove('hidden');
+    updateSubmitState();
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(2) + ' MB';
+  }
+
+  persetujuan.addEventListener('change', () => {
+    updateSubmitState();
+    saveDraft();
+  });
+
+  function updateSubmitState() {
+    const fileOk = !!selectedFile;
+    const checkOk = persetujuan.checked;
+    if (fileOk && checkOk) {
+      submitBtn.disabled = false;
+      submitBtn.setAttribute('aria-disabled', 'false');
+      hintText.innerHTML = '<i class="fa-solid fa-circle-check mr-1 text-emerald-500" aria-hidden="true"></i> Formulir siap diajukan. Klik tombol untuk melanjutkan.';
+      hintText.classList.remove('text-slate-500');
+      hintText.classList.add('text-emerald-600');
+    } else {
+      submitBtn.disabled = true;
+      submitBtn.setAttribute('aria-disabled', 'true');
+      hintText.innerHTML = '<i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> Unggah bukti pembayaran dan centang pernyataan untuk mengaktifkan tombol.';
+      hintText.classList.add('text-slate-500');
+      hintText.classList.remove('text-emerald-600');
+    }
+  }
+
+  let saveTimer = null;
+  function saveDraft() {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      const draft = {
+        nama: form.elements['nama'].value,
+        email: form.elements['email'].value,
+        namaRekening: form.elements['namaRekening'].value,
+        nomorRekening: form.elements['nomorRekening'].value,
+        bank: form.elements['bank'].value,
+        nominal: form.elements['nominal'].value,
+        persetujuan: persetujuan.checked ? '1' : '0'
+      };
+      storage.set('refundDraft', JSON.stringify(draft));
+    }, 400);
+  }
+
+  function loadDraft() {
+    const raw = storage.get('refundDraft');
+    if (!raw) return;
+    try {
+      const draft = JSON.parse(raw);
+      if (draft.nama) form.elements['nama'].value = draft.nama;
+      if (draft.email) form.elements['email'].value = draft.email;
+      if (draft.namaRekening) form.elements['namaRekening'].value = draft.namaRekening;
+      if (draft.nomorRekening) form.elements['nomorRekening'].value = draft.nomorRekening;
+      if (draft.bank) form.elements['bank'].value = draft.bank;
+      if (draft.nominal) form.elements['nominal'].value = draft.nominal;
+      if (draft.persetujuan === '1') {
+        persetujuan.checked = true;
+      }
+      updateSubmitState();
+    } catch (e) {
+      storage.remove('refundDraft');
+    }
+  }
+
+  ['nama','email','namaRekening'].forEach(name => {
+    const el = form.elements[name];
+    if (el) el.addEventListener('input', () => {
+      el.classList.remove('field-error');
+      saveDraft();
+    });
+  });
+  
+  const bankEl = form.elements['bank'];
+  if (bankEl) bankEl.addEventListener('change', (e) => {
+    e.target.classList.remove('field-error');
+    saveDraft();
+  });
+
+  loadDraft();
+
+  let progressInterval = null;
+  let redirectTimeout = null;
+  const circleRadius = 65;
+  const circleCircumference = 2 * Math.PI * circleRadius;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (submitBtn.disabled) return;
+
+    const requiredFields = ['nama', 'email', 'namaRekening', 'nomorRekening', 'bank', 'nominal'];
+    let firstError = null;
+    let valid = true;
+
+    requiredFields.forEach(name => {
+      const el = form.elements[name];
+      if (!el) return;
+      if (!el.value.trim()) {
+        el.classList.add('field-error');
+        if (!firstError) firstError = el;
+        valid = false;
+      } else {
+        el.classList.remove('field-error');
+      }
+    });
+
+    const emailEl = form.elements['email'];
+    if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+      emailEl.classList.add('field-error');
+      if (!firstError) firstError = emailEl;
+      valid = false;
+    }
+
+    const nominalVal = parseInt(parseRupiah(form.elements['nominal'].value), 10);
+    if (form.elements['nominal'].value && (isNaN(nominalVal) || nominalVal <= 0)) {
+      form.elements['nominal'].classList.add('field-error');
+      if (!firstError) firstError = form.elements['nominal'];
+      valid = false;
+    }
+
+    if (!valid) {
+      showToast('Lengkapi Data', 'Mohon isi semua field dengan benar.', 'warn');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstError.focus({ preventScroll: true });
+      }
+      return;
+    }
+
+    const formData = {
+      nama: form.elements['nama'].value.trim(),
+      email: form.elements['email'].value.trim(),
+      namaRekening: form.elements['namaRekening'].value.trim(),
+      nomorRekening: form.elements['nomorRekening'].value.trim(),
+      bank: form.elements['bank'].value,
+      nominal: parseRupiah(form.elements['nominal'].value),
+      timestamp: new Date().toISOString(),
+      ticketId: 'RFD-' + Date.now().toString().slice(-8)
+    };
+    storage.set('refundData', JSON.stringify(formData));
+    storage.remove('refundDraft');
+
+    startLoadingSequence();
+  });
+
+  function startLoadingSequence() {
+    loadingOverlay.classList.add('active');
+    progressCircle.style.strokeDasharray = circleCircumference;
+    progressCircle.style.strokeDashoffset = circleCircumference;
+
+    const statuses = [
+      { p: 0, title: 'Memvalidasi Data', text: 'Memeriksa kelengkapan dan keakuratan data yang Anda masukkan...' },
+      { p: 25, title: 'Mengamankan Transaksi', text: 'Mengenkripsi informasi rekening dengan protokol SSL 256-bit...' },
+      { p: 50, title: 'Verifikasi Bukti', text: 'Menganalisis bukti pembayaran yang telah diunggah...' },
+      { p: 75, title: 'Memproses Pengajuan', text: 'Sistem sedang memfinalisasi permohonan refund Anda...' },
+      { p: 95, title: 'Hampir Selesai', text: 'Mengalihkan ke halaman formulir pengembalian...' }
+    ];
+
+    const duration = 60000;
+    const startTime = Date.now();
+
+    if (progressInterval) clearInterval(progressInterval);
+
+    progressInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      let pct = Math.min((elapsed / duration) * 100, 100);
+      
+      loadingProgress.style.width = pct + '%';
+      loadingProgress.parentElement.setAttribute('aria-valuenow', Math.round(pct));
+      loadingPercent.textContent = Math.round(pct) + '%';
+
+      const offset = circleCircumference - (pct / 100) * circleCircumference;
+      progressCircle.style.strokeDashoffset = offset;
+
+      let currentStatus = statuses[0];
+      for (let i = 0; i < statuses.length; i++) {
+        if (pct >= statuses[i].p) {
+          currentStatus = statuses[i];
+        }
+      }
+
+      if (loadingTitle.textContent !== currentStatus.title) {
+        loadingTitle.textContent = currentStatus.title;
+        loadingStatus.textContent = currentStatus.text;
+        loadingStatus.style.animation = 'none';
+        void loadingStatus.offsetWidth;
+        loadingStatus.style.animation = 'fadeInUp 0.4s ease';
+      }
+
+      if (pct >= 100) {
+        clearInterval(progressInterval);
+        progressInterval = null;
+      }
+    }, 50);
+
+    redirectTimeout = setTimeout(() => {
+      window.location.href = 'form.html';
+    }, duration);
+  }
+
+  let toastCounter = 0;
+  function showToast(title, msg, type) {
+    type = type || 'success';
+    toastCounter++;
+    const id = 'toast-' + toastCounter;
+
+    let iconClass = 'fa-solid fa-circle-check text-sky-600 text-xl';
+    if (type === 'warn') iconClass = 'fa-solid fa-triangle-exclamation text-amber-500 text-xl';
+    else if (type === 'error') iconClass = 'fa-solid fa-circle-xmark text-rose-500 text-xl';
+
+    const toast = document.createElement('div');
+    toast.id = id;
+    toast.className = 'toast card-glass rounded-xl px-5 py-4 flex items-center gap-3';
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = `
+      <i class="${iconClass}" aria-hidden="true"></i>
+      <div>
+        <div class="font-semibold text-sm text-slate-900">${escapeHtml(title)}</div>
+        <div class="text-xs text-slate-500">${escapeHtml(msg)}</div>
+      </div>
+    `;
+    toastContainer.appendChild(toast);
+
+    void toast.offsetWidth;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 400);
+    }, 3500);
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('beforeunload', () => {
+    if (progressInterval) clearInterval(progressInterval);
+    if (redirectTimeout) clearTimeout(redirectTimeout);
+    if (observer) observer.disconnect();
+  });
+
+})();
+</script>
+
+</body>
+</html>
