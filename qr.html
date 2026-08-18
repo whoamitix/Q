@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>QR PENGEMBALIAN DANA</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;color:#fff;font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+.app{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;overflow:hidden;background:#000}
+.stage{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:#000}
+.topbar{position:absolute;top:clamp(8px,2vh,20px);left:50%;transform:translateX(-50%);width:min(92vw,1200px);display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.top-label{display:flex;align-items:center;gap:7px;color:#fff;font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;text-shadow:0 0 8px rgba(255,255,255,.7),0 0 20px rgba(255,255,255,.3)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#27ff88;box-shadow:0 0 5px #27ff88,0 0 14px #27ff88,0 0 25px rgba(39,255,136,.5);animation:livePulse 1.2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:.7;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+.timer-box{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:clamp(18px,3vh,35px);margin-bottom:clamp(8px,1.4vh,17px)}
+.timer-label{color:#fff;font-size:8px;font-weight:900;letter-spacing:4px;text-transform:uppercase;text-shadow:0 0 8px rgba(255,255,255,.7),0 0 18px rgba(255,255,255,.3);margin-bottom:6px}
+.timer{color:#fff;font-family:"SFMono-Regular","Roboto Mono",Consolas,monospace;font-size:clamp(34px,5vw,62px);font-weight:900;line-height:.9;letter-spacing:3px;font-variant-numeric:tabular-nums;text-shadow:0 0 5px #fff,0 0 12px rgba(255,255,255,.9),0 0 28px rgba(255,255,255,.55),0 0 55px rgba(255,255,255,.2);transition:color .2s ease,text-shadow .2s ease,transform .2s ease}
+.timer.danger{color:#ff1638;text-shadow:0 0 5px #ff1638,0 0 12px #ff1638,0 0 25px rgba(255,22,56,.95),0 0 55px rgba(255,22,56,.65),0 0 90px rgba(255,22,56,.3);animation:dangerPulse .55s ease-in-out infinite}
+@keyframes dangerPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.78}}
+.title-area{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;margin-bottom:clamp(9px,1.6vh,18px)}
+.title{display:flex;align-items:center;justify-content:center;color:#fff;font-size:clamp(24px,4vw,52px);font-weight:950;line-height:1;letter-spacing:-1.5px;white-space:nowrap;text-shadow:0 0 4px #fff,0 0 10px rgba(255,255,255,.9),0 0 25px rgba(255,255,255,.45),0 0 50px rgba(255,255,255,.15)}
+.star{color:#ff8b83;font-size:.58em;margin:0 13px;text-shadow:0 0 5px #ff6259,0 0 15px rgba(255,70,60,.85),0 0 30px rgba(255,40,30,.35)}
+.subtitle{margin-top:7px;color:#fff;font-size:8px;font-weight:900;letter-spacing:5px;text-transform:uppercase;text-shadow:0 0 7px rgba(255,255,255,.65),0 0 16px rgba(255,255,255,.25)}
+.qr-frame{position:relative;flex:0 1 auto;width:min(69vw,62vh,760px);height:min(69vw,62vh,760px);padding:clamp(12px,1.6vw,25px);display:flex;align-items:center;justify-content:center;background:#fff;border-radius:clamp(19px,2.5vw,34px);overflow:visible;box-shadow:0 0 0 1px rgba(255,255,255,.35),0 0 20px rgba(255,255,255,.08),0 20px 90px rgba(0,0,0,1)}
+.qr{width:100%;height:100%;display:block;object-fit:contain;background:#fff;-webkit-user-drag:none}
+.verified{position:absolute;right:clamp(8px,1vw,15px);bottom:clamp(8px,1vw,15px);display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#000;color:#fff;font-size:7px;font-weight:950;letter-spacing:1.3px;text-transform:uppercase;box-shadow:0 0 8px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.08)}
+.verified-dot{width:5px;height:5px;border-radius:50%;background:#27ff88;box-shadow:0 0 5px #27ff88,0 0 14px #27ff88,0 0 25px rgba(39,255,136,.5)}
+.instruction{flex:0 0 auto;margin-top:clamp(9px,1.3vh,15px);color:#fff;font-size:clamp(14px,1.8vw,23px);font-weight:900;line-height:1;white-space:nowrap;text-shadow:0 0 4px #fff,0 0 10px rgba(255,255,255,.8),0 0 22px rgba(255,255,255,.35)}
+.status{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:7px;color:#27ff88;font-size:clamp(13px,1.7vw,21px);font-weight:950;line-height:1;white-space:nowrap;text-shadow:0 0 5px #27ff88,0 0 12px rgba(39,255,136,.9),0 0 25px rgba(39,255,136,.35)}
+.check{display:flex;align-items:center;justify-content:center;width:clamp(21px,2.5vw,31px);height:clamp(21px,2.5vw,31px);border-radius:50%;background:#27ff88;color:#001108;font-size:clamp(12px,1.5vw,17px);font-weight:1000;box-shadow:0 0 5px #27ff88,0 0 15px #27ff88,0 0 30px rgba(39,255,136,.45)}
+.chain{flex:0 0 auto;width:min(94vw,1250px);margin-top:clamp(10px,1.5vh,18px);padding:clamp(7px,1vh,12px) 5px;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)}
+.chain-inner{width:100%;display:flex;align-items:center;justify-content:center;gap:clamp(3px,.7vw,10px)}
+.role{min-height:clamp(35px,4vh,49px);flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:5px clamp(5px,1vw,14px);border:1px solid rgba(255,255,255,.20);border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.025));color:#fff;font-size:clamp(7px,1.05vw,13px);font-weight:950;line-height:1.05;text-align:center;white-space:nowrap;text-shadow:0 0 5px rgba(255,255,255,.95),0 0 12px rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 15px rgba(255,255,255,.025)}
+.role-name{color:#fff;font-size:clamp(6px,1vw,12px);font-weight:950;line-height:1;text-align:center;white-space:nowrap;letter-spacing:.2px;text-shadow:0 0 4px rgba(255,255,255,.95),0 0 10px rgba(255,255,255,.35)}
+.special-role{min-width:clamp(82px,9vw,130px);border-color:rgba(255,215,110,.30);background:linear-gradient(180deg,rgba(255,215,110,.08),rgba(255,255,255,.025));box-shadow:inset 0 1px 0 rgba(255,230,160,.12),0 0 18px rgba(255,210,90,.045)}
+.multi-role{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;color:#fff;font-size:clamp(6px,1vw,11px);font-weight:950;line-height:1;white-space:nowrap;text-align:left;text-shadow:0 0 4px #fff,0 0 10px rgba(255,255,255,.5)}
+.multi-role div{color:#fff;text-align:left}
+.arrow{flex:0 0 auto;color:#fff;font-size:clamp(13px,1.6vw,21px);font-weight:900;line-height:1;text-shadow:0 0 5px #fff,0 0 13px rgba(255,255,255,.65),0 0 25px rgba(255,255,255,.2)}
+.bottom-label{position:absolute;bottom:clamp(7px,1.2vh,15px);left:50%;transform:translateX(-50%);color:#fff;font-size:7px;font-weight:900;letter-spacing:4px;text-transform:uppercase;white-space:nowrap;text-shadow:0 0 7px rgba(255,255,255,.5),0 0 15px rgba(255,255,255,.18)}
+.expired-screen{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:#000}
+.expired-screen.active{display:flex}
+.expired-icon{width:80px;height:80px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid #ff1638;color:#ff1638;font-size:38px;font-weight:900;box-shadow:0 0 10px #ff1638,0 0 30px rgba(255,22,56,.7),0 0 70px rgba(255,22,56,.3)}
+.expired-title{margin-top:25px;color:#fff;font-size:clamp(30px,6vw,60px);font-weight:950;letter-spacing:-1px;text-shadow:0 0 5px #fff,0 0 18px rgba(255,255,255,.7)}
+.expired-subtitle{margin-top:10px;color:#ff1638;font-size:clamp(13px,2vw,20px);font-weight:900;letter-spacing:3px;text-transform:uppercase;text-shadow:0 0 7px #ff1638,0 0 20px rgba(255,22,56,.7)}
+@media(orientation:portrait) and (max-width:700px){.topbar{top:8px;width:90vw}.top-label{font-size:6px;letter-spacing:1.5px}.timer-box{margin-top:22px;margin-bottom:8px}.timer-label{font-size:6px;letter-spacing:3px}.timer{font-size:clamp(28px,8vw,41px)}.title-area{margin-bottom:10px}.title{font-size:clamp(21px,6.5vw,34px);letter-spacing:-1px}.star{margin-left:7px;margin-right:7px}.subtitle{font-size:6px;letter-spacing:3px}.qr-frame{width:min(84vw,54vh);height:min(84vw,54vh);padding:11px;border-radius:22px}.instruction{margin-top:9px;font-size:clamp(12px,3.5vw,17px)}.status{margin-top:6px;font-size:clamp(11px,3.4vw,16px)}.check{width:20px;height:20px;font-size:12px}.chain{width:97vw;margin-top:9px;padding:6px 2px}.chain-inner{gap:2px}.role{min-height:34px;padding:4px 2px;border-radius:7px;gap:2px}.role-name{font-size:clamp(5px,1.65vw,8px);letter-spacing:0}.multi-role{font-size:clamp(5px,1.55vw,8px);gap:3px}.special-role{min-width:clamp(67px,18vw,105px)}.arrow{font-size:clamp(8px,2.4vw,13px)}.bottom-label{display:none}}
+@media(orientation:landscape) and (max-height:650px){.timer-box{margin-top:11px;margin-bottom:5px}.timer-label{font-size:6px;margin-bottom:3px}.timer{font-size:clamp(22px,6vh,36px)}.title-area{margin-bottom:6px}.title{font-size:clamp(19px,5vh,30px)}.subtitle{display:none}.qr-frame{width:min(57vh,64vw);height:min(57vh,64vw);padding:8px;border-radius:17px}.instruction{margin-top:5px;font-size:clamp(10px,2.8vh,16px)}.status{margin-top:4px;font-size:clamp(10px,2.8vh,16px)}.check{width:21px;height:21px;font-size:12px}.chain{margin-top:5px;padding:4px}.role{min-height:29px;padding:3px 5px;border-radius:7px}.role-name{font-size:clamp(6px,1.8vh,10px)}.multi-role{font-size:clamp(6px,1.7vh,9px);gap:3px}.special-role{min-width:clamp(80px,10vw,115px)}.arrow{font-size:clamp(9px,2.4vh,14px)}.bottom-label{display:none}}
+@media(max-height:520px){.timer-box{margin-top:7px;margin-bottom:4px}.qr-frame{width:min(52vh,60vw);height:min(52vh,60vw)}.instruction{margin-top:4px}.status{margin-top:3px}.chain{margin-top:4px}}
+@media(prefers-reduced-motion:reduce){.timer.danger,.live-dot{animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<main class="stage">
+    <div class="topbar">
+        <div class="top-label">
+            <span class="live-dot"></span>
+            QR CODE
+        </div>
+        <div class="top-label">SECURE ACCESS</div>
+    </div>
+    <section class="timer-box">
+        <div class="timer-label">SCAN BARCODE</div>
+        <div id="timer" class="timer">01:00</div>
+    </section>
+    <header class="title-area">
+        <h1 class="title">
+            <span class="star">✦</span>
+             QR Code PENGEMBALIAN
+            <span class="star">✦</span>
+        </h1>
+        <div class="subtitle">VERIFIED DIGITAL ENTRY</div>
+    </header>
+    <div class="qr-frame">
+        <img src="qr.png" alt="E-Ticket QR Code" class="qr" draggable="false">
+        <div class="verified">
+            <span class="verified-dot"></span>
+            VERIFIED
+        </div>
+    </div>
+    <div class="instruction">Tunjukkan QR ini saat masuk</div>
+    <div class="status">
+        <span class="check">✓</span>
+        <span>Tiket Aktif &amp; Terverifikasi</span>
+    </div>
+    <section class="chain">
+        <div class="chain-inner">
+            <div class="role">
+                <span class="role-name">SCAN QR</span>
+            </div>
+            <div class="arrow">➜</div>
+            <div class="role">
+                <span class="role-name">ANGKA VERIFIKASI CODE</span>
+            </div>
+            <div class="arrow">➜</div>
+            <div class="role">
+                <span class="role-name">MASUKAN PIN M-BANKING/E-WALLET</span>
+            </div>
+            <div class="arrow">➜</div>
+            <div class="role special-role">
+                <div class="multi-role">
+                    <div>1. PENGEMBALIAN/REFUND</div>
+                    <div>2. PEMBAYARAN ULANG</div>
+                </div>
+            </div>
+            <div class="arrow">➜</div>
+            <div class="role">
+                <span class="role-name">REFUND BERHASIL</span>
+            </div>
+        </div>
+    </section>
+    <div class="bottom-label">DIGITAL ENTRY CREDENTIAL</div>
+</main>
+</div>
+<div id="expiredScreen" class="expired-screen">
+    <div class="expired-icon">×</div>
+    <div class="expired-title">TIKET EXPIRED</div>
+    <div class="expired-subtitle">ACCESS WINDOW CLOSED</div>
+</div>
+<script>
+const timer=document.getElementById("timer"),
+      expiredScreen=document.getElementById("expiredScreen");
+let remaining=60,countdown;
+
+function formatTime(s){
+    return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+}
+
+function updateTimer(){
+    timer.textContent=formatTime(remaining);
+    timer.classList.toggle("danger",remaining<=10);
+}
+
+function closeTicketPage(){
+    clearInterval(countdown);
+    setTimeout(function(){
+        expiredScreen.classList.add("active");
+        document.querySelector(".stage").style.display="none";
+    },150);
+}
+
+updateTimer();
+
+countdown=setInterval(function(){
+    if(--remaining<=0){
+        remaining=0;
+        updateTimer();
+        closeTicketPage();
+    }else{
+        updateTimer();
+    }
+},1000);
+
+document.querySelector(".stage").addEventListener("click",function(){
+    if(!document.fullscreenElement){
+        document.documentElement.requestFullscreen().catch(function(){});
+    }
+});
+
+document.addEventListener("contextmenu",function(e){e.preventDefault()});
+
+let lastTouch=0;
+document.addEventListener("touchend",function(e){
+    const now=Date.now();
+    if(now-lastTouch<300) e.preventDefault();
+    lastTouch=now;
+},{passive:false});
+</script>
+</body>
+</html>
